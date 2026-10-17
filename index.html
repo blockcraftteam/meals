@@ -5,10 +5,33 @@
 <meta name="apple-mobile-web-app-title" content="Meals">
 <title>Meals</title>
 <link rel="icon" href="https://drive.google.com/uc?export=download&id=16RKs2dSZyMnv8ZnCIurxXfdZutL0b6gZ">
-<style>html,body{margin:0;height:100%;background:#fbf7f2}iframe{position:fixed;top:0;left:0;width:100%;height:100%;border:0}
-#fb{position:fixed;bottom:10px;left:0;right:0;text-align:center;font:13px -apple-system,sans-serif;display:none}#fb a{color:#c2410c}</style>
+<style>
+html,body{margin:0;height:100%;background:#fbf7f2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2a1d12}
+iframe{position:fixed;top:0;left:0;width:100%;height:100%;border:0}
+#cover{position:fixed;top:0;left:0;right:0;bottom:0;z-index:5;background:#fbf7f2;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;padding:24px;text-align:center;transition:opacity .3s}
+#cover.gone{opacity:0;pointer-events:none}
+.box{max-width:340px}.logo{font-size:56px;margin-bottom:8px}
+h1{font-size:28px;margin:0 0 8px}
+p{color:#7a6a5c;font-size:16px;line-height:1.45;margin:0 0 22px}
+.btn{display:inline-block;background:#c2410c;color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:14px 26px;border-radius:14px;box-shadow:0 6px 18px rgba(194,65,12,.25)}
+.again{display:block;margin:16px auto 0;color:#7a6a5c;font-size:14px;background:none;border:0;text-decoration:underline;font-family:inherit}
+.spin{color:#7a6a5c}#signin{display:none}
+</style>
 </head><body>
-<iframe src="https://script.google.com/a/macros/blockmail.ca/s/AKfycbysMhxA4cXbvrjzQb2M73iIB19KdMUv4WPLCjxLsNflWtGYxFRa33D7ksrT-mlk45Q/exec" allow="clipboard-write" title="Meals"></iframe>
-<div id="fb">Not loading? <a href="https://script.google.com/a/macros/blockmail.ca/s/AKfycbysMhxA4cXbvrjzQb2M73iIB19KdMUv4WPLCjxLsNflWtGYxFRa33D7ksrT-mlk45Q/exec">Open Meals directly</a></div>
-<script>setTimeout(function(){document.getElementById('fb').style.display='block'},8000)</script>
+<iframe id="app" src="https://script.google.com/a/macros/blockmail.ca/s/AKfycbysMhxA4cXbvrjzQb2M73iIB19KdMUv4WPLCjxLsNflWtGYxFRa33D7ksrT-mlk45Q/exec" title="Meals"></iframe>
+<div id="cover"><div class="box">
+  <div class="logo">🍽️</div>
+  <div id="loading" class="spin">Loading Meals…</div>
+  <div id="signin">
+    <h1>Meals</h1>
+    <p>Sign in with your Blockmail account to see what's cooking.</p>
+    <a class="btn" href="https://script.google.com/a/macros/blockmail.ca/s/AKfycbysMhxA4cXbvrjzQb2M73iIB19KdMUv4WPLCjxLsNflWtGYxFRa33D7ksrT-mlk45Q/exec">Sign in with Blockmail</a>
+    <button class="again" onclick="location.reload()">I'm signed in, try again</button>
+  </div>
+</div></div>
+<script>
+var ok=false,cover=document.getElementById('cover');
+window.addEventListener('message',function(e){if(e.data==='meals-ready'){ok=true;cover.className='gone'}});
+setTimeout(function(){if(!ok){document.getElementById('loading').style.display='none';document.getElementById('signin').style.display='block'}},6000);
+</script>
 </body></html>
