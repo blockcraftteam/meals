@@ -31,6 +31,8 @@ p{color:#7a6a5c;font-size:16px;line-height:1.45;margin:0 0 22px}
 </div></div>
 <script>
 var ok=false,cover=document.getElementById('cover');
+// Pass ?meal=...&date=... through to the app (used by reminder links).
+(function(){var f=document.getElementById('app'),q=location.search;if(q&&/^\?[\w=&%.-]*$/.test(q)){f.src=f.src+q;var a=document.querySelector('#signin .btn');if(a)a.href=f.src}})();
 window.addEventListener('message',function(e){if(e.data==='meals-ready'){ok=true;cover.className='gone'}});
 var APP=document.getElementById('app').src;
 // If the framed app hasn't checked in (usually blocked cookies or not signed in), open it directly.
