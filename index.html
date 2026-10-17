@@ -24,14 +24,17 @@ p{color:#7a6a5c;font-size:16px;line-height:1.45;margin:0 0 22px}
   <div id="loading" class="spin">Loading Meals…</div>
   <div id="signin">
     <h1>Meals</h1>
-    <p>Sign in with your Blockmail account to see what's cooking.</p>
-    <a class="btn" href="https://script.google.com/a/macros/blockmail.ca/s/AKfycbysMhxA4cXbvrjzQb2M73iIB19KdMUv4WPLCjxLsNflWtGYxFRa33D7ksrT-mlk45Q/exec">Sign in with Blockmail</a>
-    <button class="again" onclick="location.reload()">I'm signed in, try again</button>
+    <p>Tap below to open Meals. You may be asked to sign in with your Blockmail account.</p>
+    <a class="btn" href="https://script.google.com/a/macros/blockmail.ca/s/AKfycbysMhxA4cXbvrjzQb2M73iIB19KdMUv4WPLCjxLsNflWtGYxFRa33D7ksrT-mlk45Q/exec">Open Meals</a>
+    <button class="again" onclick="location.reload()">Try again</button>
   </div>
 </div></div>
 <script>
 var ok=false,cover=document.getElementById('cover');
 window.addEventListener('message',function(e){if(e.data==='meals-ready'){ok=true;cover.className='gone'}});
-setTimeout(function(){if(!ok){document.getElementById('loading').style.display='none';document.getElementById('signin').style.display='block'}},6000);
+var APP=document.getElementById('app').src;
+// If the framed app hasn't checked in (usually blocked cookies or not signed in), open it directly.
+setTimeout(function(){if(ok)return;document.getElementById('loading').textContent='Opening Meals…';location.replace(APP);
+  setTimeout(function(){document.getElementById('loading').style.display='none';document.getElementById('signin').style.display='block'},4000)},5000);
 </script>
 </body></html>
